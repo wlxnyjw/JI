@@ -3,46 +3,97 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-	<style>
-	
-		#ii{
-			dispaly:block;
-			width:200px;
-			height:100px;
-			background-color:black;
-			margin:0 auto;
-			
-			text-align:center;
-		}
-		.mm{
-			position:relative;
-			top: 0;
-			margin: auto;
-			bottom: 0;
-			
-			display:inline-block;
-		}
-	</style>
+		<style>
+			#ii {
+
+				width: 200px;
+				height: 100px;
+				background-color: black;
+				margin: 0 auto;
+				display: flex;
+
+
+			}
+
+			.mm {
+				position: relative;
+				top: 0;
+				margin: auto;
+				bottom: 0;
+
+				display: inline-block;
+			}
+
+			#playlist {
+				width: 200px;
+				height: 600px;
+				background-color: grey;
+				margin: 0 auto;
+			}
+		</style>
 	</head>
-	
-	<body >
+
+	<body>
 		<div id="ii">
-		<div class="mm"><img src="img/i1-normal.png" id="i1" > </div>
-		<div class="mm"><img src="img/i3-normal.png" id="i3" > </div>
-		<div class="mm"><img src="img/i5-normal.png" id="i5" > </div>
-		<div class="mm"><img src="img/i4-normal.png" id="i4" > </div>
-		<div class="mm"><img src="img/i2-normal.png" id="i2" > </div>
+			<div class="mm m2"><img src="img/i1-normal.png" id="i1"> </div>
+			<div class="mm m2"><img src="img/i3-normal.png" id="i3"> </div>
+			<div class="mm"><img src="img/play.png" id="i5"> </div>
+			<div class="mm m2"><img src="img/i4-normal.png" id="i4"> </div>
+			<div class="mm m2"><img src="img/i2-normal.png" id="i2"> </div>
 		</div>
+
+		<div id="playlist">
+			<ul>
+				<li><a href="#" target="_self">1.mp3</a></li>
+				<li><a href="#" target="_self">2.mp3</a></li>
+				<li><a href="#" target="_self">3.mp3</a></li>
+
+			</ul>
+		</div>
+
+
+
 		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<audio id="audio" src="music/1.mp3"></audio>
 		<script>
-			$(document).ready(function(){
-				$("img").hover(function(e){
-					console.log(e.target.id)
-					$("#"+e.target.id).attr('src',"img/"+e.target.id+"-hover.png");
-				},function(e){
-					$("#"+e.target.id).attr('src',"img/"+e.target.id+"-normal.png");
+			var isPlaying = false;
+			$(document).ready(function() {
+				$(".m2").hover(function(e) {
+					$("#" + e.target.id).attr('src', "img/" + e.target.id + "-hover.png");
+				}, function(e) {
+					$("#" + e.target.id).attr('src', "img/" + e.target.id + "-normal.png");
+				})
+
+				$("#i5").click(function() {
+					isPlaying = !isPlaying
+					if (isPlaying) {
+						$("#i5").attr("src", "img/pause.png");
+						document.getElementById("audio").play();
+					} else {
+						$("#i5").attr("src", "img/play.png");
+
+						document.getElementById("audio").pause();
+					}
+				})
+
+				function pause() {
+					
+					document.getElementById("audio").pause();
+				}
+
+				function play(p) {
+					if (($("audio").attr('src')) == "music/" + p.target.text) {} else {
+						$("#i5").attr("src", "img/pause.png");
+						$("audio").attr('src', "music/" + p.target.text)
+						document.getElementById("audio").play();
+					}
+				}
+				$("a").click(function(e) {
+					
+					
 				})
 			})
 		</script>
+
 	</body>
 </html>
